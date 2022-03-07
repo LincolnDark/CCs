@@ -8,3 +8,8 @@ intersection_set = set.intersection(set(list_a), set(list_b))
 print(intersection_set)
 
 #Only got overlapping, where are the none overlapping?
+
+non_inter_test = set(list_a) ^ set(list_b)
+print(non_inter_test)
+
+# source https://stackoverflow.com/questions/40185258/find-elements-not-in-the-intersection-of-two-lists
