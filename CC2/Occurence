@@ -1,4 +1,5 @@
 string = ["hi", "dee", "hi", "how", "are", "you", "mr", "dee"]
+d={}
 for i in range(len(string)-1):
     x=string[i]
     c=0
