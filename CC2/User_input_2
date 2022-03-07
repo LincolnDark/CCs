@@ -11,8 +11,9 @@ def scrabble_score(word):
     for i in word:
         total = total+score[i.lower()]
     return total
+print(scrabble_score(word))
 
 #source codecademy.com/forum_questions/522f576fabf82117ec000f21
 
 #AD need to add print statement:
-print(scrabble_score(word))
+# print(scrabble_score(word))
