@@ -14,8 +14,8 @@ arcpy.CopyFeatures_management(lyr, saved_layer)
 if arcpy.Exists(saved_layer):
     print("Created file successfully!")
 #Querying distribution by year (As my CSV is comprised of two seperate years of Osprey distribution)
-Years_2010 = arcpy.SelectLayerByAttribute_management("osprey_polygon.shp", "NEW_SELECTION", "'year' = 2010")
-
+Years_2010 = arcpy.SelectLayerByAttribute_management("osprey_polygon.shp", "NEW_SELECTION", "year = 2010")
+# arcpy.management.SelectLayerByAttribute("osprey_polygon", "NEW_SELECTION", "year = 2010", None)
 
 #Extracting Extent
 # desc = arcpy.Describe(saved_layer)
