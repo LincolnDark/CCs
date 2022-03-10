@@ -1,9 +1,7 @@
 #The Basics
 import csv
-
 import arcpy
-import csv
-import os
+
 arcpy.env.workspace = r"C:\Users\14017\Desktop\NRS_528\Github\CC5"
 in_table = r"CC5_CSV.csv"
 x_coords = "lat"
@@ -15,7 +13,7 @@ spRef = arcpy.SpatialReference(4326)
 #extracting by unique year
 years = []
 with open(in_table) as the_csv:
-    headerline = the_csv.next()
+    headerline = the_csv.next(years)
     for row in csv.reader(the_csv):
         if row[2] not in years:
             years.append(row[2])
