@@ -13,25 +13,28 @@ spRef = arcpy.SpatialReference(4326)
 #extracting by unique year
 years = []
 with open(in_table) as the_csv:
-    headerline = the_csv.next(years)
+    headerline = next(the_csv)
     for row in csv.reader(the_csv):
         if row[2] not in years:
             years.append(row[2])
 print(len(years))
 print(years)
 
-#test
+#Use countries example as guide
+
 # making new CSVs by year
-# os.mkdir("Years_Directory")
-# header = "lat,long,year"
-# for year in years:
-#     year_count = 1
-#     with open("CC5_CSV.csv") as the_csv:
-#         for row in csv.reader(the_csv):
-#             if row[0] == year:
-#                 file = open(r"Years_Directory/" + str(year) + ".csv", "w")
-#                 file.write(header)
-#                 year_count = 0
+import os
+outputDirectory = "Years_Directory"
+if not os.path.exists(outputDirectory):
+    os.mkdir(outputDirectory)
+for year in years:
+    with open("CC5_CSV.csv") as the_csv:
+        file = open(os.path.join(outputDirectory, str(year) + ".csv"), "w")
+        file.write(headerline)
+        for row in csv.reader(the_csv):
+            if row[2] == year:
+                file.write(",".join(row))
+                file.write("\n")
 
 # os.rmdir("Years_Directory")
 
