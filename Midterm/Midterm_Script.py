@@ -8,7 +8,7 @@
 # the names of all the towns, and count the number of towns
 # Step 0 - Create a CSV of the attribute table of the shapefile
 # Step 1 - use a for loop to print the name of each town
-# Step 2 - use a for loop to print the number of towns in the dataset
+# Step 2 - print the number of towns in the dataset
 
 # Step 0
 # Changes the user will have to make:
