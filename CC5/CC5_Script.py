@@ -36,17 +36,18 @@ for year in years:
                 file.write(",".join(row))
                 file.write("\n")
 
-# os.rmdir("Years_Directory")
-
-
-# arcpy.env.overwriteOutput = True
-# lyr = arcpy.MakeXYEventLayer_management(in_table, x_coords, y_coords, out_layer, spRef)
-# arcpy.CopyFeatures_management(lyr, saved_layer)
-# if arcpy.Exists(saved_layer):
-#     print("Created file successfully!")
+# making the shapefiles
+arcpy.env.overwriteOutput = True
+lyr = arcpy.MakeXYEventLayer_management(in_table, x_coords, y_coords, out_layer, spRef)
+arcpy.CopyFeatures_management(lyr, saved_layer)
+if arcpy.Exists(saved_layer):
+    print("Created file successfully!")
 # #Querying distribution by year (As my CSV is comprised of two seperate years of Osprey distribution)
 # Years_2010 = arcpy.SelectLayerByAttribute_management("osprey_polygon.shp", "NEW_SELECTION", "year = 2010")
-#
+# Years_2020 = arcpy.SelectLayerByAttribute_management("osprey_polygon.shp", "NEW_SELECTION", "year = 2020")
+
+
+
 # #Extracting Extent
 # desc = arcpy.Describe(saved_layer)
 # XMin = desc.extent.XMin
