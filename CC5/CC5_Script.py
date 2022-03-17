@@ -37,20 +37,65 @@ for year in years:
                 file.write("\n")
 
 # making the shapefiles
-arcpy.env.overwriteOutput = True
-lyr = arcpy.MakeXYEventLayer_management(in_table, x_coords, y_coords, out_layer, spRef)
-arcpy.CopyFeatures_management(lyr, saved_layer)
-if arcpy.Exists(saved_layer):
-    print("Created file successfully!")
-# #Querying distribution by year (As my CSV is comprised of two seperate years of Osprey distribution)
-# Years_2010 = arcpy.SelectLayerByAttribute_management("osprey_polygon.shp", "NEW_SELECTION", "year = 2010")
-# Years_2020 = arcpy.SelectLayerByAttribute_management("osprey_polygon.shp", "NEW_SELECTION", "year = 2020")
+# arcpy.env.overwriteOutput = True
+# for year in years:
+# See line 44, what do I put in for the 1st and 4th input? I don't know how to code this so I get two seperate
+# files, one for 2010 and one for 2020.
 
+# lyr_2010 = arcpy.MakeXYEventLayer_management(r"2010.csv", "long", "lat", "Osprey_2010", spRef)
+# arcpy.CopyFeatures_management(lyr_2010, r"Osprey_2010.shp")
+# if arcpy.Exists(r"Osprey_2010.shp"):
+#     print("Good Job Lincoln!")
 
+# lyr_2020 = arcpy.MakeXYEventLayer_management(r"2020.csv", "long", "lat", "Osprey_2020", spRef)
+# arcpy.CopyFeatures_management(lyr_2020, r"Osprey_2020.shp")
+# if arcpy.Exists(r"Osprey_2020.shp"):
+#     print("Good Job Lincoln, you did it twice!")
 
-# #Extracting Extent
-# desc = arcpy.Describe(saved_layer)
+# describing the shapefiles
+# desc = arcpy.Describe("Osprey_2010.shp")
 # XMin = desc.extent.XMin
 # XMax = desc.extent.XMax
 # YMin = desc.extent.YMin
 # YMax = desc.extent.YMax
+# print(XMin, XMax, YMin, YMax)
+#
+# # Fishnet
+# arcpy.env.outputCoordinateSystem = arcpy.SpatialReference(4326)
+# outFeatureClass_2010 = "Fishnet_2010.shp"
+# originCoordinate = str(XMin) + " " + str(YMin)  # Left bottom of our point data
+# yAxisCoordinate = str(XMin) + " " + str(YMin + 1)  # This sets the orientation on the y-axis, so we head north
+# cellSizeWidth = "0.25"
+# cellSizeHeight = "0.25"
+# numRows = ""  # Leave blank, as we have set cellSize
+# numColumns = "" # Leave blank, as we have set cellSize
+# oppositeCorner = str(XMax) + " " + str(YMax)  # i.e. max x and max y coordinate
+# labels = "NO_LABELS"
+# templateExtent = "#"  # No need to use, as we have set yAxisCoordinate and oppositeCorner
+# geometryType = "POLYGON"  # Create a polygon, could be POLYLINE
+#
+# arcpy.CreateFishnet_management(outFeatureClass_2010, originCoordinate, yAxisCoordinate,
+#                                cellSizeWidth, cellSizeHeight, numRows, numColumns,
+#                                oppositeCorner, labels, templateExtent, geometryType)
+#
+# if arcpy.Exists(outFeatureClass_2010):
+#     print("Created 2010 Fishnet file successfully!")
+#
+# # Spatially join the fishnet to the shapefile
+# target_features="Fishnet_2010.shp"
+# join_features="Osprey_2010.shp"
+# out_feature_class="HeatMap_2010.shp"
+# join_operation="JOIN_ONE_TO_ONE"
+# join_type="KEEP_ALL"
+# field_mapping=""
+# match_option="INTERSECT"
+# search_radius=""
+# distance_field_name=""
+#
+# arcpy.SpatialJoin_analysis(target_features, join_features, out_feature_class,
+#                            join_operation, join_type, field_mapping, match_option,
+#                            search_radius, distance_field_name)
+# # check if it works
+# if arcpy.Exists(out_feature_class):
+#     print("Created Heatmap file successfully!")
+#     print("Deleting intermediate files")
