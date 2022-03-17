@@ -36,9 +36,12 @@ for year in years:
                 file.write(",".join(row))
                 file.write("\n")
 
+# My CSV for 2020 is empty, how do I fix this?
+
 # making the shapefiles
 # arcpy.env.overwriteOutput = True
 # for year in years:
+
 # See line 44, what do I put in for the 1st and 4th input? I don't know how to code this so I get two seperate
 # files, one for 2010 and one for 2020.
 
