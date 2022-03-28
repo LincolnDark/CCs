@@ -29,22 +29,23 @@ for year in year_list:
                 file.write(",".join(row))
                 file.write("\n")
 
-    in_Table = os.path.join(directory, outputDirectory, str(year) + ".csv")
-    x = "long"
-    y = "lat"
-    z_coords = ""
-    out_Layer = "years"
-    saved_Layer = os.path.join(directory, outputDirectory, str(year) + "Osprey_map.shp")
-    spRef = arcpy.SpatialReference(4326)
-    lyr = arcpy.MakeXYEventLayer_management(in_Table, x, y, out_Layer, spRef, z_coords)
-    print(arcpy.GetCount_management(out_Layer))
-    arcpy.CopyFeatures_management(lyr, saved_Layer)
-    if arcpy.Exists(saved_Layer):
-        print("Good Job, Lincoln!")
-
-    desc = arcpy.Describe(saved_Layer)
-    XMin = desc.extent.XMin
-    XMax = desc.extent.XMax
-    YMin = desc.extent.YMin
-    YMax = desc.extent.YMax
+# making a shapefile
+    # in_Table = os.path.join(directory, outputDirectory, str(year) + ".csv")
+    # x = "long"
+    # y = "lat"
+    # z_coords = ""
+    # out_Layer = "years"
+    # saved_Layer = os.path.join(directory, outputDirectory, str(year) + "Osprey_map.shp")
+    # spRef = arcpy.SpatialReference(4326)
+    # lyr = arcpy.MakeXYEventLayer_management(in_Table, x, y, out_Layer, spRef, z_coords)
+    # print(arcpy.GetCount_management(out_Layer))
+    # arcpy.CopyFeatures_management(lyr, saved_Layer)
+    # if arcpy.Exists(saved_Layer):
+    #     print("Good Job, Lincoln!")
+    #
+    # desc = arcpy.Describe(saved_Layer)
+    # XMin = desc.extent.XMin
+    # XMax = desc.extent.XMax
+    # YMin = desc.extent.YMin
+    # YMax = desc.extent.YMax
 
