@@ -2,13 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34709e12-05b5-410f-9b1f-6f4e9dc40fff" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../CC5/CC7" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CC5/CC5_Script.py" beforeDir="false" afterPath="$PROJECT_DIR$/../CC5/CC5_Script.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/CC5.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CC7.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CC5/CC7" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -25,14 +37,15 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Class_07" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\14017\Desktop\NRS_528\Github\CC7" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.CC5_Script">
+  <component name="RunManager" selected="Python.CC7">
     <configuration name="CC5_Script" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="CC5" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -55,7 +68,7 @@
       <method v="2" />
     </configuration>
     <configuration name="CC7" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="CC7" />
+      <module name="CC5" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -98,8 +111,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.CC5_Script" />
         <item itemvalue="Python.CC7" />
+        <item itemvalue="Python.CC5_Script" />
       </list>
     </recent_temporary>
   </component>

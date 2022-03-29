@@ -3,12 +3,12 @@ import arcpy
 import os
 import glob
 arcpy.env.overwriteOutput = True
-directory = r"C:\Users\14017\Desktop\NRS_528\Github\CC5"
+directory = r"C:\Users\14017\Desktop\NRS_528\Github\CC7"
 outputDirectory = "Years_Directory"
 if not os.path.exists(os.path.join(directory, outputDirectory)):
     os.mkdir(os.path.join(directory, outputDirectory))
 data_file = "CC5_CSV.csv"
-input_directory = r"C:\Users\14017\Desktop\NRS_528\Github\CC5"
+input_directory = r"C:\Users\14017\Desktop\NRS_528\Github\CC7"
 
 if not os.path.exists(os.path.join(input_directory, "output_files")):
     os.mkdir(os.path.join(input_directory, "output_files"))
