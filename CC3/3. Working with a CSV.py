@@ -4,7 +4,7 @@ df = pd.read_csv('co2_ppm_daily.csv')
 
 # 1 Annual Average
 
-co2_data = co2.frame
+# co2_data = co2.frame
 co2_data["date"] = pd.to_datetime(co2_data[["year", "month", "day"]])
 
 # code appropriated from: https://scikit-learn.org/stable/auto_examples/gaussian_process/plot_gpr_co2.html
