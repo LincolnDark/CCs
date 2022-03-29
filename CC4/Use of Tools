@@ -1,9 +1,0 @@
-#Tool - shrink
-import arcpy
-from arcpy import env
-from arcpy.sa import *
-env.workspace = "C:/Users/14017/Desktop/NRS_528"
-Outshrink = shrink(NLCD_2001.img_Layer_1, 1, [6])
-Outshrink.save("C:/Users/14017/Desktop/NRS_528")
-
-#The purpose of this code is to shrink all deciduous forest areas by 1 pixel. 
