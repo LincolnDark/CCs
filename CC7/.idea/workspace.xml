@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34709e12-05b5-410f-9b1f-6f4e9dc40fff" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../CC5/CC7" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CC5/CC5_Script.py" beforeDir="false" afterPath="$PROJECT_DIR$/../CC5/CC5_Script.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -1,19 +1,11 @@
 import csv
 import arcpy
 import os
-import glob
 arcpy.env.overwriteOutput = True
 directory = r"C:\Users\14017\Desktop\NRS_528\Github\CC5"
 outputDirectory = "Years_Directory"
 if not os.path.exists(os.path.join(directory, outputDirectory)):
     os.mkdir(os.path.join(directory, outputDirectory))
-data_file = "CC5_CSV.csv"
-input_directory = r"C:\Users\14017\Desktop\NRS_528\Github\CC5"
-
-if not os.path.exists(os.path.join(input_directory, "output_files")):
-    os.mkdir(os.path.join(input_directory, "output_files"))
-if not os.path.exists(os.path.join(input_directory, "temporary_files")):
-    os.mkdir(os.path.join(input_directory, "temporary_files"))
 
 # making a list of years
 year_list = []
@@ -25,16 +17,6 @@ with open(os.path.join(directory, r"CC5_CSV.csv")) as the_csv:
         if row[2] not in year_list:
             year_list.append(row[2])
 print(year_list)
-
-year_list = []
-with open(os.path.join(input_directory, data_file)) as year_csv:
-    header_line = next(year_csv)
-    for row in csv.reader(year_csv):
-        try: #Using try/except saves us if there is a line with no data in the file
-            if row[2] not in year_list:
-                year_list.append(row[2])
-        except:
-            pass
 
 # making a csv for each year
 for year in year_list:
@@ -48,64 +30,19 @@ for year in year_list:
                 file.write("\n")
         file.close()
 
-
-# splitting the files
-
-if len(year_list) > 1:
-    for year in year_list:
-        year_count = 1
-        with open(os.path.join(input_directory, data_file)) as year_csv:
-            header = next(year_csv)
-            for row in csv.reader(year_csv):
-                if row[2] == year:
-                    if year_count == 1:
-                        file = open(
-                            os.path.join(input_directory, "temporary_files", str(year.replace(" ", "_")) + ".csv"),
-                            "w")
-                        file.write(header)
-                        year_count = 0
-                    # make well formatted line
-                    file.write(",".join(row))
-                    file.write("\n")
-        file.close()
-
-# making two shapefiles
-
-os.chdir(os.path.join(input_directory, "temporary_files"))  # same as env.workspace
-arcpy.env.workspace = os.path.join(input_directory, "output_files")
-year_file_list = glob.glob("*.csv")  # Find all CSV files
-
-count = 0
-
-for year_file in year_file_list:
-    print(".. Processing: " + str(year_file) + " by converting to shapefile format")
-    in_Table = year_file
-    x_coords = "lat"
-    y_coords = "long"
+    # making two shapefiles
+    in_Table = os.path.join(directory, outputDirectory, str(year) + ".csv")
+    x = "long"
+    y = "lat"
     z_coords = ""
-    out_Layer = "year" + str(count)
-    saved_Layer = year_file.replace(".", "_") + ".shp"
-
-# Set the spatial reference
-spRef = arcpy.SpatialReference(4326)  # 4326 == WGS 1984
-
-lyr = arcpy.MakeXYEventLayer_management(in_Table, x_coords, y_coords, out_Layer, spRef, z_coords)
-arcpy.CopyFeatures_management(lyr, saved_Layer)
-count = count + 1
-arcpy.Delete_management(lyr)
-
-in_Table = os.path.join(directory, outputDirectory, str(year) + ".csv")
-x = "long"
-y = "lat"
-z_coords = ""
-out_Layer = "years"
-saved_Layer = os.path.join(directory, outputDirectory, str(year) + "Osprey_map.shp")
-spRef = arcpy.SpatialReference(4326)
-lyr = arcpy.MakeXYEventLayer_management(in_Table, x, y, out_Layer, spRef, z_coords)
-print(arcpy.GetCount_management(out_Layer))
-arcpy.CopyFeatures_management(lyr, saved_Layer)
-if arcpy.Exists(saved_Layer):
-    print("Good Job, Lincoln!")
+    out_Layer = "years"
+    saved_Layer = os.path.join(directory, outputDirectory, str(year) + "Osprey_map.shp")
+    spRef = arcpy.SpatialReference(4326)
+    lyr = arcpy.MakeXYEventLayer_management(in_Table, x, y, out_Layer, spRef, z_coords)
+    print(arcpy.GetCount_management(out_Layer))
+    arcpy.CopyFeatures_management(lyr, saved_Layer)
+    if arcpy.Exists(saved_Layer):
+        print("Good Job, Lincoln!")
 
     desc = arcpy.Describe(saved_Layer)
     XMin = desc.extent.XMin
@@ -153,5 +90,3 @@ if arcpy.Exists(saved_Layer):
         print("Deleting unneccessary files")
         arcpy.Delete_management(target_features)
         arcpy.Delete_management(join_features)
-
-arcpy.Delete_management(os.path.join(input_directory, "temporary_files"))
