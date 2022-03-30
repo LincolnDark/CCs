@@ -36,14 +36,7 @@ for year_select in year_list:
         for row in csv_reader:
             year, month, day = row[0].split("-")
             if year == year_select:
-                #ppm_by_year.append(row[1]) # AD -This is the problem
                 ppm_by_year.append(float(str(row[1])))
-    #print("Year is: " + str(int(year_select)) + " ppm is: " + str(float(sum(ppm_by_year) / len(ppm_by_year)))) # AD - Now error here
-    # print(type(year_select)) # AD tyring to figure out error - This is fine
-    # print("Year is: " + str(year_select)) # AD tyring to figure out error - This is fine
-    #print(float(sum(ppm_by_year) / len(ppm_by_year))) # AD - Failure is here
-    #print(sum(ppm_by_year)) # AD - This must be a list of strings which is why the math fails.
-    #print(ppm_by_year) # AD - Yes, these are strings, so we need to type convert on line 39.
     print("Year is: " + str(year_select) + " ppm is: " + str(float(sum(ppm_by_year) / len(ppm_by_year)))) # AD - Now error here
 
 
