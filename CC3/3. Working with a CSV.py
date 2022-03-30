@@ -2,7 +2,7 @@ import csv
 
 year_list, month_list, value_list = [],[],[]
 with open ("co2_ppm_daily.csv") as co2:
-    csv_reader =csv.reader(co2,delimiter = ',')
+    csv_reader =csv.reader(co2, delimiter=',')
     linecount = 0
     headerline = co2.next()
     print(headerline)
@@ -22,67 +22,19 @@ print("Maximum = " + str(max(value_list)))
 print("Average = " + str(float(sum(value_list) / int(line_count))))
 print("Average 2 = " + str(sum(value_list) / len(value_list)))
 
+# yearly average
+print("there are " + str(len(year_list)) + " years.")
+for year_select in year_list:
+    ppm_by_year = []
+    with open("co2_ppm_daily.csv") as co2:
+        csv_reader = csv.reader(co2, delimiter=',')
+        linecount = 0
+        header = next(csv_reader)
+        print(header)
+        for row in csv_reader:
+            year, month, day = row[0].split("-")
+            if year == year_select:
+                ppm_by_year.append(row[1])
+    print("Year is: " + str(int(year_select)) + " ppm is: " + str(float(sum(ppm_by_year) / len(ppm_by_year))))
 
 
-# code from https://datatofish.com/use-pandas-to-calculate-stats-from-an-imported-csv-file/
-
-# 3 Seasonal averages
-
-import csv
-# from datetime import datetime
-# from itertools import groupby
-#
-# LOOKUP_SEASON = {
-#     11: 'Autumn',
-#     12: 'Winter',
-#     1: 'Winter',
-#     2: 'Winter',
-#     3: 'Spring',
-#     4: 'Spring',
-#     5: 'Spring',
-#     6: 'Summer',
-#     7: 'Summer',
-#     8: 'Summer',
-#     9: 'Autumn',
-#     10: 'Autumn'
-# }
-#
-#
-# def get_season(row):
-#     date = datetime.strptime(row[0], '%d/%m/%Y')
-#     season = LOOKUP_SEASON[date.month]
-#     if season == 'Winter':
-#         if date.month == 1:
-#             last_year, next_year = date.year - 1, date.year
-#         else:
-#             last_year, next_year = date.year, date.year + 1
-#         return '{} {}/{}'.format(season, last_year, next_year)
-#     else:
-#         return '{} {}'.format(season, date.year)
-#
-#
-# def get_year(row):
-#     date = datetime.strptime(row[0], '%d/%m/%Y')
-#     if date.month < 8:
-#         return date.year - 1
-#     else:
-#         return date.year
-#
-#
-# season.mean("Winter")
-# season.mean("Spring")
-# season.mean("Summer")
-# season.mean("Fall"
-#
-# # code appropriated from https://stackoverflow.com/questions/22693024/group-data-in-csv-by-season-and-year-using-python-and-pandas
-#
-# # 4 Calculating anomaly
-#
-# import numpy as np
-# import pandas as pd
-#
-# df['month'] = df['Dates'].dt.strftime("%m").astype(int)
-# df = df.merge(monthly_means.rename(columns={'Dates': 'month', 'Values': 'Mean'}), on='month', how='left')
-# df['Diff'] = df['Mean'] - df['Values']
-#
-# # code appropriated from https://stackoverflow.com/questions/65839307/calculating-monthly-anomalies-in-pandas
