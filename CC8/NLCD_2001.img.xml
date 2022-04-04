@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xml:lang="en"><Esri><CreaDate>20210106</CreaDate><CreaTime>10204100</CreaTime><ArcGISFormat>1.0</ArcGISFormat><SyncOnce>TRUE</SyncOnce><DataProperties><lineage><Process ToolSource="c:\program files\arcgis\pro\Resources\ArcToolbox\toolboxes\Spatial Analyst Tools.tbx\ExtractByMask" Date="20210106" Time="102041">ExtractByMask NLCD_2001_Land_Cover_L48_20190424.img Washington_county F:\Classes\NRS_522_2021\Modules\Forest_fragmentation\Data\NLCD_2001.img</Process></lineage></DataProperties></Esri></metadata>
