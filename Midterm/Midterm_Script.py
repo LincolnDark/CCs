@@ -17,7 +17,7 @@
 
 import arcpy
 
-arcpy.env.workspace = r"C:\Users\14017\Desktop\NRS_528\Github\Midterm"
+arcpy.env.workspace = r"C:\Data\Students_2022\Dark\Midterm"
 arcpy.env.overwriteOutput = True
 arcpy.ExportXYv_stats("towns.shp", "NAME", "COMMA", "Towns.csv",
                       "ADD_FIELD_NAMES")
