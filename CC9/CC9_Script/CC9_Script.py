@@ -33,7 +33,6 @@ print(len(species_list)) # Here, we print the length of the species list, becaus
 
 # Part 3 - Generating two shapefiles, one with photos and one without
 import arcpy
-arcpy.SelectLayerByAttribute_management("RI_Forest_Health_Works_Project%3A_Points_All_Invasives.shp", "NEW_SELECTION",
-                                        "[photo] = 'y'")
-arcpy.CopyFeatures_management("RI_Forest_Health_Works_Project%3A_Points_All_Invasives.shp", 'Rows_With_Photos')
-arcpy.FeatureClassToShapefile_conversion(["Rows_With_Photos"], r"C:\Users\14017\Desktop\NRS_528\Github\CC9")
+input_features = arcpy.SelectLayerByAttribute_management("input_shp", "NEW_SELECTION", "[photo] = 'y'")
+# arcpy.CopyFeatures_management("RI_Forest_Health_Works_Project%3A_Points_All_Invasives.shp", 'Rows_With_Photos')
+arcpy.FeatureClassToShapefile_conversion(input_features, r"C:\Users\14017\Desktop\NRS_528\Github\CC9")
