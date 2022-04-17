@@ -32,7 +32,8 @@ print(len(species_list)) # Here, we print the length of the species list, becaus
 # it will show us the names of each species. However, we want to know the number of species
 
 # Part 3 - Generating two shapefiles, one with photos and one without
-import arcpy
-input_features = arcpy.SelectLayerByAttribute_management("input_shp", "NEW_SELECTION", "[photo] = 'y'")
+YesPhotos = arcpy.AddFieldDelimiters(input_shp, "photo") + " = 'y'"
+print(YesPhotos)
+input_features = arcpy.SelectLayerByAttribute_management(input_shp, "NEW_SELECTION", YesPhotos)
 # arcpy.CopyFeatures_management("RI_Forest_Health_Works_Project%3A_Points_All_Invasives.shp", 'Rows_With_Photos')
 arcpy.FeatureClassToShapefile_conversion(input_features, r"C:\Users\14017\Desktop\NRS_528\Github\CC9")
