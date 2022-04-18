@@ -10,7 +10,7 @@ working_directory = r"C:\Users\14017\Desktop\NRS_528\CC10_Data"
 arcpy.env.workspace = working_directory
 output_directory = r"C:\Users\14017\Desktop\NRS_528\Github\CC10"
 
-# Next, we bring in each raster that we would like to use
+# This section assigns a name to each of our rasters
 Feb_B4 = arcpy.Raster(os.path.join(working_directory, "201502", "LC08_L1TP_012031_20150201_20170301_01_T1_B4.tif"))
 Feb_B5 = arcpy.Raster(os.path.join(working_directory, "201502", "LC08_L1TP_012031_20150201_20170301_01_T1_B5.tif"))
 Apr_B4 = arcpy.Raster(os.path.join(working_directory, "201504", "LC08_L1TP_012031_20150422_20170301_01_T1_B4.tif"))
@@ -24,8 +24,10 @@ Oct_B5 = arcpy.Raster(os.path.join(working_directory, "201510", "LC08_L1TP_01203
 Nov_B4 = arcpy.Raster(os.path.join(working_directory, "201511", "LC08_L1TP_012031_20151116_20170225_01_T1_B4.tif"))
 Nov_B5 = arcpy.Raster(os.path.join(working_directory, "201511", "LC08_L1TP_012031_20151116_20170225_01_T1_B5.tif"))
 
-Feb_NVDI = RasterCalculator([Feb_B4, Feb_B5], ["x", "y"], "(y-x)/(y+x)")
-Feb_NVDI.save(output_directory + "\Feb_NVDI")
+
+Feb_NVDI = RasterCalculator([Feb_B4, Feb_B5], ["x", "y"], "(y-x)/(y+x)") #This line uses the raster calculator tool
+# from ArcGIS pro to conduct the NVDI equation on our rasters
+Feb_NVDI.save(output_directory + "\Feb_NVDI") # This line saves the NVDI raster for February to our output directory
 Apr_NVDI = RasterCalculator([Apr_B4, Apr_B5], ["x", "y"], "(y-x)/(y+x)")
 Apr_NVDI.save(output_directory + "\Apr_NVDI")
 May_NVDI = RasterCalculator([May_B4, May_B5], ["x", "y"], "(y-x)/(y+x)")
