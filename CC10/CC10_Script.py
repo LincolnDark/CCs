@@ -20,7 +20,7 @@ def Model():  # Model
     arcpy.CheckOutExtension("ImageAnalyst")
 
     # Model Environment settings
-    with arcpy.EnvManager(scratchWorkspace=r"C:\Users\14017\Documents\ArcGIS\Projects\CC10\CC10.gdb", workspace=r"C:\Users\14017\Documents\ArcGIS\Projects\CC10\CC10.gdb"):
+    with arcpy.EnvManager(scratchWorkspace=r"C:\Users\14017\Documents\ArcGIS\Projects\CC10\CC10.gdb", workspace=r"C:\Users\14017\Desktop\NRS_528\Github\CC10"):
         LC08_L1TP_012031_20150201_20170301_01_T1_B5_tif = arcpy.Raster("LC08_L1TP_012031_20150201_20170301_01_T1_B5.tif")
         LC08_L1TP_012031_20150201_20170301_01_T1_B4_tif = arcpy.Raster("LC08_L1TP_012031_20150201_20170301_01_T1_B4.tif")
         LC08_L1TP_012031_20150422_20170301_01_T1_B5_tif = arcpy.Raster("LC08_L1TP_012031_20150422_20170301_01_T1_B5.tif")
