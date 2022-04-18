@@ -1,5 +1,7 @@
 # Lincoln Dark - Coding Challenge 10 - April 18th, 2022
 # The first step is importing necessary packages and setting our workspace, so our script knows where to find the data
+# To make this code work on your own machine, change working_directory to where your data is stored, and change
+# output_directory to where you would like the final NDVI rasters to be saved to.
 import arcpy, os
 from arcpy.sa import *
 arcpy.CheckOutExtension("Spatial")
