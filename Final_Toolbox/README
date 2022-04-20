@@ -1,0 +1,26 @@
+Lincoln Dark - April 20th, 2022 - NRS 528 - Final Toolbox README
+
+The purpose of this toolbox is to provide the user with three tools that can be used to identify areas in their state
+or province that is suitable breeding habitat for the Canada Warbler. The Canada Warbler is a migratory songbird that
+has faced a population loss of over 62% since 1966 (Reitsma et. al, 2020). Due to this unfortunate fact, it is of the
+utmost importance to identify suitable breeding habitat for this species and protect these areas to prevent further
+population decline.
+
+I was inspired to pursue this project because in a recent discussion with Dr. Charles Clarkson, the Director of
+Avian Research of The Audubon Society of Rhode Island and former coordinator of the Rhode Island Bird Atlas,
+he informed me that birds use the interior of the state during migration much more than ornithologists previously
+thought, especially the Canada Warbler. Upon learning this, I became interested in studying other ways the
+Canada Warbler may use the interior of our state in greater than expected frequencies, such as breeding.
+
+Below are the descriptions of the tools
+Tool 1 - Defining the study area, this will select all areas that are 10 miles or greater from the coastline.
+
+Tool 2 - (2 parts)
+2a - Select all forested wetlands from the wetlands data set -> clip this land cover type to the study area ->
+    convert this feature class to a raster format -> region group -> reclassify the raster based on area
+2b - Buffer all roads in the state by 4 distances; 328 feet, 984 feet, 3280 feet, and 50,000 feet -> use the intersect
+tool so the distance between each buffer distance becomes it's own feature (i.e 328-984 feet from a road will be a
+single feature) -> convert these features to raster format -> reclassify the raster based on distance to the road
+
+Tool 3 - Using the raster calculator to determine the suitability score of each area, weighing distance to road and
+forested wetland size.
