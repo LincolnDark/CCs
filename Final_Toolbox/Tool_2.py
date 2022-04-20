@@ -14,9 +14,9 @@ Study_area = "study_area.shp"
 arcpy.env.overwriteOutput = True
 
 # Tool 2a
-# arcpy.analysis.Select(Wetlands, "Forested_Wetlands.shp", "WETLAND_TY='Freshwater Forested/Shrub Wetland'")
-# arcpy.Clip_analysis("Forested_Wetlands.shp", Study_area, "FW_in_SA.shp")
-# arcpy.FeatureToRaster_conversion("FW_in_SA.shp", "ACRES", "FW_in_SA_RAS.tif", 10)
-# arcpy.ddd.Int("FW_in_SA_RAS.tif", "FW_in_SA_Int")
-# RegionGroup("FW_in_SA_Int", "EIGHT", "WITHIN", "", "")
-Reclassify("FW_in_SA_int", "COUNT", RemapRange([[0,538,"NODATA"],[538, 1076,"1"],[1076,6458,"2"],[6458,100000,"3"]]))
+arcpy.analysis.Select(Wetlands, "Forested_Wetlands.shp", "WETLAND_TY='Freshwater Forested/Shrub Wetland'")
+arcpy.Clip_analysis("Forested_Wetlands.shp", Study_area, "FW_in_SA.shp")
+arcpy.FeatureToRaster_conversion("FW_in_SA.shp", "ACRES", "FW_in_SA_RAS.tif", 10)
+arcpy.ddd.Int("FW_in_SA_RAS.tif", "FW_in_SA_Int")
+RegionGroup("FW_in_SA_Int", "EIGHT", "", "", "")
+Reclassify("FW_in_SA_Int", "COUNT", RemapRange([[0,5380,"NODATA"],[5380, 10760,"1"],[10760,64580,"2"],[64580,100000000000,"3"]]))
