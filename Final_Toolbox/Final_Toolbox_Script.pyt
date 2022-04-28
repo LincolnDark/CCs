@@ -1,11 +1,9 @@
+# Lincoln Dark - NRS 528 - Final Toolbox - April 28th, 2022
+# First, we import necessary packages, allow for the script to overwrite itself (if we ran it previously and want to
+# run it again), and make an empty list of parameters.
 import arcpy
 arcpy.env.overwriteOutput = True
 params = []
-Towns = r"C:\Users\14017\Desktop\NRS_528\Github\Final_Toolbox\Final_Tool_Data\towns.shp"
-
-
-
-Tool3_Output = r"C:\Users\14017\Desktop\NRS_528\Github\Final_Toolbox\Coastal_Forested_Wetlands.shp"
 
 class Toolbox(object): # This block of code defines the toolbox
     def __init__(self):
@@ -15,9 +13,9 @@ class Toolbox(object): # This block of code defines the toolbox
         self.alias = ""
 
 
-        self.tools = [Tool1, Tool2, Tool3]
+        self.tools = [Tool1, Tool2, Tool3] # here we make a list of the 3 tools in the toolbox.
 
-class Tool1(object): # Defining the first tool
+class Tool1(object): # Creating the first tool
     def __init__(self):
         self.label = "Buffering Coastline"
         self.description = ""
@@ -57,7 +55,7 @@ class Tool1(object): # Defining the first tool
         parameter.  This method is called after internal validation."""
         return
 
-    def execute(self, parameters, messages):
+    def execute(self, parameters, messages): # def execute includes the exact code the tool will use to run
         """The source code of the tool."""
         input_poly1 = parameters[0].valueAsText
         output = parameters[1].valueAsText
@@ -67,7 +65,7 @@ class Tool1(object): # Defining the first tool
                               buffer_distance_or_field="5 miles")
         return
 
-class Tool2(object):
+class Tool2(object): # Creating the second tool
     def __init__(self):
         self.label = "Defining Forested Wetlands"
         self.description = ""
@@ -116,7 +114,7 @@ class Tool2(object):
                               where_clause="WETLAND_TY='Freshwater Forested/Shrub Wetland'")
         return
 
-class Tool3(object):
+class Tool3(object): #Creating the third tool
     def __init__(self):
         self.label = "Clipping Wetlands to Study Area"
         self.description = ""
