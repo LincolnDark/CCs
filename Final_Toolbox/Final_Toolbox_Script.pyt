@@ -2,10 +2,9 @@ import arcpy
 arcpy.env.overwriteOutput = True
 params = []
 Towns = r"C:\Users\14017\Desktop\NRS_528\Github\Final_Toolbox\Final_Tool_Data\towns.shp"
-Coast = r"C:\Users\14017\Desktop\NRS_528\Github\Final_Toolbox\Final_Tool_Data\Coastline.shp"
-Wetlands = r"C:\Users\14017\Desktop\NRS_528\Github\Final_Toolbox\Final_Tool_Data\Wetlands.shp"
-Tool1_Output = r"C:\Users\14017\Desktop\NRS_528\Github\Final_Toolbox\Buffered_Coastline.shp"
-Tool2_Output = r"C:\Users\14017\Desktop\NRS_528\Github\Final_Toolbox\Forested_Wetlands.shp"
+
+
+
 Tool3_Output = r"C:\Users\14017\Desktop\NRS_528\Github\Final_Toolbox\Coastal_Forested_Wetlands.shp"
 
 class Toolbox(object): # This block of code defines the toolbox
@@ -32,14 +31,14 @@ class Tool1(object): # Defining the first tool
                                      datatype="DEFeatureClass",
                                      parameterType="Required",
                                      direction="Input")
-        input_poly1.value = Coast
+        input_poly1.value = r"C:\Users\14017\Desktop\NRS_528\Github\Final_Toolbox\Final_Tool_Data\Coastline.shp"
         params.append(input_poly1)
         output = arcpy.Parameter(name="output",
                                  displayName="Output",
                                  datatype="DEFeatureClass",
                                  parameterType="Required",
                                  direction="Output")
-        output.value = Tool1_Output
+        output.value = r"C:\Users\14017\Desktop\NRS_528\Github\Final_Toolbox\Buffered_Coastline.shp"
         params.append(output)
         return params
 
@@ -64,7 +63,7 @@ class Tool1(object): # Defining the first tool
         output = parameters[1].valueAsText
 
         arcpy.Buffer_analysis(in_features=input_poly1,
-                              out_feature_class=Tool1_Output,
+                              out_feature_class=output,
                               buffer_distance_or_field="5 miles")
         return
 
@@ -81,14 +80,14 @@ class Tool2(object):
                                      datatype="DEFeatureClass",
                                      parameterType="Required",
                                      direction="Input")
-        input_poly2.value = Wetlands
+        input_poly2.value = r"C:\Users\14017\Desktop\NRS_528\Github\Final_Toolbox\Final_Tool_Data\Wetlands.shp"
         params.append(input_poly2)
         output = arcpy.Parameter(name="output",
                                  displayName="Output",
                                  datatype="DEFeatureClass",
                                  parameterType="Required",
                                  direction="Output")
-        output.value = Tool2_Output
+        output.value = r"C:\Users\14017\Desktop\NRS_528\Github\Final_Toolbox\Forested_Wetlands.shp"
         params.append(output)
         return params
 
@@ -113,7 +112,7 @@ class Tool2(object):
         output = parameters[1].valueAsText
 
         arcpy.Select_analysis(in_features=input_poly2,
-                              out_feature_class=Tool2_Output,
+                              out_feature_class=output,
                               where_clause="WETLAND_TY='Freshwater Forested/Shrub Wetland'")
         return
 
@@ -130,7 +129,7 @@ class Tool3(object):
                                       datatype="DEFeatureClass",
                                       parameterType="Required",
                                       direction="Input")
-        input_poly3.value = Tool1_Output
+        input_poly3.value = r"C:\Users\14017\Desktop\NRS_528\Github\Final_Toolbox\Buffered_Coastline.shp"
         params.append(input_poly3)
 
         input_poly4 = arcpy.Parameter(name="input_poly4",
@@ -138,14 +137,14 @@ class Tool3(object):
                                      datatype="DEFeatureClass",
                                      parameterType="Required",
                                      direction="Input")
-        input_poly4.value = Tool2_Output
+        input_poly4.value = r"C:\Users\14017\Desktop\NRS_528\Github\Final_Toolbox\Forested_Wetlands.shp"
         params.append(input_poly4)
         output = arcpy.Parameter(name="output",
                                  displayName="Output",
                                  datatype="DEFeatureClass",
                                  parameterType="Required",
                                  direction="Output")
-        output.value = Tool3_Output
+        output.value = r"C:\Users\14017\Desktop\NRS_528\Github\Final_Toolbox\Coastal_Forested_Wetlands.shp"
         params.append(output)
         return params
 
@@ -168,8 +167,8 @@ class Tool3(object):
         input_poly4 = parameters[1].valueAsText
         output = parameters[2].valueAsText
 
-        arcpy.Clip_analysis(in_features=Tool2_Output,
-                            clip_features=Tool1_Output,
+        arcpy.Clip_analysis(in_features=r"C:\Users\14017\Desktop\NRS_528\Github\Final_Toolbox\Forested_Wetlands.shp",
+                            clip_features=r"C:\Users\14017\Desktop\NRS_528\Github\Final_Toolbox\Buffered_Coastline.shp",
                             out_feature_class=output,
                             cluster_tolerance="")
 
