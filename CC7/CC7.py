@@ -1,19 +1,23 @@
+# Lincoln Dark - NRS 528 - Coding Challenge 7
+# This code generate heatmaps that can be used in GIS of the distribution of
+# Osprey nests in both the years 2010 and 2020.
+
 import csv
 import arcpy
 import os
 import glob
 arcpy.env.overwriteOutput = True
 directory = r"C:\Users\14017\Desktop\NRS_528\Github\CC7"
-outputDirectory = "Years_Directory"
-if not os.path.exists(os.path.join(directory, outputDirectory)):
-    os.mkdir(os.path.join(directory, outputDirectory))
+output_Directory = "Years_Directory"
 data_file = "CC5_CSV.csv"
-input_directory = r"C:\Users\14017\Desktop\NRS_528\Github\CC7"
 
-if not os.path.exists(os.path.join(input_directory, "output_files")):
-    os.mkdir(os.path.join(input_directory, "output_files"))
-if not os.path.exists(os.path.join(input_directory, "temporary_files")):
-    os.mkdir(os.path.join(input_directory, "temporary_files"))
+
+if not os.path.exists(os.path.join(directory, output_Directory)):
+    os.mkdir(os.path.join(directory, output_Directory))
+if not os.path.exists(os.path.join(directory, "output_files")):
+    os.mkdir(os.path.join(directory, "output_files"))
+if not os.path.exists(os.path.join(directory, "temporary_files")):
+    os.mkdir(os.path.join(directory, "temporary_files"))
 
 # making a list of years
 year_list = []
@@ -27,7 +31,7 @@ with open(os.path.join(directory, r"CC5_CSV.csv")) as the_csv:
 print(year_list)
 
 year_list = []
-with open(os.path.join(input_directory, data_file)) as year_csv:
+with open(os.path.join(directory, data_file)) as year_csv:
     header_line = next(year_csv)
     for row in csv.reader(year_csv):
         try: #Using try/except saves us if there is a line with no data in the file
@@ -40,7 +44,7 @@ with open(os.path.join(input_directory, data_file)) as year_csv:
 for year in year_list:
     with open(os.path.join(directory, r"CC5_CSV.csv")) as the_csv:
         csv_reader = csv.reader(the_csv)
-        file = open(os.path.join(directory, outputDirectory, str(year) + ".csv"), "w")
+        file = open(os.path.join(directory, output_Directory, str(year) + ".csv"), "w")
         file.write(headerline)
         for row in csv_reader:
             if row[2] == year:
@@ -54,13 +58,13 @@ for year in year_list:
 if len(year_list) > 1:
     for year in year_list:
         year_count = 1
-        with open(os.path.join(input_directory, data_file)) as year_csv:
+        with open(os.path.join(directory, data_file)) as year_csv:
             header = next(year_csv)
             for row in csv.reader(year_csv):
                 if row[2] == year:
                     if year_count == 1:
                         file = open(
-                            os.path.join(input_directory, "temporary_files", str(year.replace(" ", "_")) + ".csv"),
+                            os.path.join(directory, "temporary_files", str(year.replace(" ", "_")) + ".csv"),
                             "w")
                         file.write(header)
                         year_count = 0
@@ -71,8 +75,8 @@ if len(year_list) > 1:
 
 # making two shapefiles
 
-os.chdir(os.path.join(input_directory, "temporary_files"))  # same as env.workspace
-arcpy.env.workspace = os.path.join(input_directory, "output_files")
+os.chdir(os.path.join(directory, "temporary_files"))  # same as env.workspace
+arcpy.env.workspace = os.path.join(directory, "output_files")
 year_file_list = glob.glob("*.csv")  # Find all CSV files
 
 count = 0
@@ -94,18 +98,18 @@ arcpy.CopyFeatures_management(lyr, saved_Layer)
 count = count + 1
 arcpy.Delete_management(lyr)
 
-in_Table = os.path.join(directory, outputDirectory, str(year) + ".csv")
+in_Table = os.path.join(directory, output_Directory, str(year) + ".csv")
 x = "long"
 y = "lat"
 z_coords = ""
 out_Layer = "years"
-saved_Layer = os.path.join(directory, outputDirectory, str(year) + "Osprey_map.shp")
+saved_Layer = os.path.join(directory, output_Directory, str(year) + "Osprey_map.shp")
 spRef = arcpy.SpatialReference(4326)
 lyr = arcpy.MakeXYEventLayer_management(in_Table, x, y, out_Layer, spRef, z_coords)
 print(arcpy.GetCount_management(out_Layer))
 arcpy.CopyFeatures_management(lyr, saved_Layer)
 if arcpy.Exists(saved_Layer):
-    print("Good Job, Lincoln!")
+    print("Layer has been saved")
 
     desc = arcpy.Describe(saved_Layer)
     XMin = desc.extent.XMin
@@ -115,7 +119,7 @@ if arcpy.Exists(saved_Layer):
 
 # creating a fishnet for each shapefile
     arcpy.env.outputCoordinateSystem = arcpy.SpatialReference(4326)
-    outFeatureClass = os.path.join(directory, outputDirectory, str(year) + "_Osprey_nest_locations.shp")
+    outFeatureClass = os.path.join(directory, output_Directory, str(year) + "_Osprey_nest_locations.shp")
     originCoordinate = str(XMin) + " " + str(YMin)
     yAxisCoordinate = str(XMin) + " " + str(YMin + 1)
     cellSizeWidth = "0.25"
@@ -134,9 +138,9 @@ if arcpy.Exists(saved_Layer):
 
 # joining fishnets to points
 
-    target_features = os.path.join(directory, outputDirectory, str(year) + "_Osprey_nest_locations.shp")
-    join_features = os.path.join(directory, outputDirectory, str(year) + "Osprey_map.shp")
-    out_feature_class = os.path.join(directory, outputDirectory, str(year) + "_heatmap.shp")
+    target_features = os.path.join(directory, output_Directory, str(year) + "_Osprey_nest_locations.shp")
+    join_features = os.path.join(directory, output_Directory, str(year) + "Osprey_map.shp")
+    out_feature_class = os.path.join(directory, output_Directory, str(year) + "_heatmap.shp")
     join_operation = "JOIN_ONE_TO_ONE"
     join_type = "KEEP_ALL"
     field_mapping = ""
@@ -154,4 +158,4 @@ if arcpy.Exists(saved_Layer):
         arcpy.Delete_management(target_features)
         arcpy.Delete_management(join_features)
 
-arcpy.Delete_management(os.path.join(input_directory, "temporary_files"))
+arcpy.Delete_management(os.path.join(directory, "temporary_files"))
